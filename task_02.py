@@ -1,23 +1,31 @@
-def coincidence(lst: list, rng: range) -> list:
-    """
-    Определяет элементы из массива list, значения которого входят в указанный диапазон range.
-    Если не передан хотя бы один из параметров, то должен вернуться пустой массив.
-
-    :param lst: исходный список
-    :param rng: диапазон для проверки
-    :return: список элементов из lst, которые входят в диапазон rng
-    """
-    if not lst or not rng:
-        return []
+def coincidence(lst, rng):
+    if not isinstance(lst, list):
+        raise TypeError("lst должен быть списком.")
+    if not isinstance(rng, range):
+        raise TypeError("rng должен быть диапазоном.")
 
     result = []
+
     for item in lst:
-        if isinstance(item, (int, float)) and rng.start <= item <= rng.stop:
-            result.append(item)
-        elif isinstance(item, str) and item.isnumeric() and rng.start <= int(item) <= rng.stop:
-            result.append(int(item))
+        if item is None:
+            continue
 
-    return sorted(result)  # Отсортировать результат в порядке возрастания
+        if isinstance(item, (int, float)):
+            if rng.start <= item < rng.stop:
+                result.append(item)
+        else:
+            try:
+                float_item = float(item)
+            except ValueError:
+                continue
 
-# Тесты
+            if rng.start <= float_item < rng.stop:
+                result.append(float_item)
+
+    return sorted(result)
+
+
+# Протестируем функцию с заданным тестовым случаем
 print(coincidence([None, 1, 'foo', 4, 2, 2.5], range(1, 4)))  # => [1, 2, 2.5]
+
+
