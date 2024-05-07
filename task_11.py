@@ -27,7 +27,8 @@ class Dessert:
 
 
 # Пример использования
-dessert = Dessert("Cake", 300)
+dessert = Dessert(name="Cake", calories=300)
+
 print(dessert.name)  # Cake
 print(dessert.calories)  # 300
 print(dessert.is_healthy())  # False

@@ -17,6 +17,8 @@ class Dessert:
 
     @calories.setter
     def calories(self, value):
+        if not isinstance(value, int):
+            raise TypeError("Числовое значение")
         self._calories = value
 
     def is_healthy(self) -> bool:
@@ -41,6 +43,40 @@ class JellyBean(Dessert):
 
     def is_delicious(self) -> bool:
         return super().is_delicious() and self.flavor != "black licorice"
+
+
+# Тесты
+dessert = JellyBean()
+
+if not issubclass(dessert.__class__, JellyBean):
+    raise Exception("Invalid inheritance")
+
+dessert.name = "test_name"
+print(dessert.name)
+
+dessert.name = "test_name2"
+print(dessert.name)
+
+if dessert.name != "test_name2":
+    raise Exception("Setter for name is not working")
+
+dessert.calories = 100
+print(dessert.calories)
+
+dessert.calories = 200
+print(dessert.calories)
+
+if dessert.calories != 200:
+    raise Exception("Setter for calories is not working")
+
+print(dessert.is_delicious())
+
+if not dessert.is_delicious():
+    raise Exception("Invalid method result")
+
+dessert.flavor = "test_flavor"
+print(dessert.flavor)
+print(dessert.is_healthy())
 
 
 # Пример использования

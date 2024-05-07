@@ -6,49 +6,39 @@ class NoSuchStrategyError(Exception):
     pass
 
 
-def rps_game_winner(players: list) -> tuple:
-    """
-    Функция определяет победителя в игре "Камень-ножницы-бумага".
-
-    :param players: список игроков и их ходов в формате [["игрок1", "ход1"], ["игрок2", "ход2"]]
-    :return: имя и ход победителя в формате "игрок ход"
-    """
-
-    # Проверка количества игроков
+def rps_game_winner(players):
     if len(players) != 2:
-        raise WrongNumberOfPlayersError("Неверное количество игроков")
+        raise WrongNumberOfPlayersError("Неправильное количество игроков")
 
-    # Проверка корректности ходов
-    for player, move in players:
-        if move not in ["R", "P", "S"]:
-            raise NoSuchStrategyError("Некорректный ход")
+    strategies = set(['R', 'P', 'S'])
+    for player, strategy in players:
+        if strategy not in strategies:
+            raise NoSuchStrategyError("Несуществующая стратегия")
 
-    # Определение победителя
-    player1, move1 = players[0]
-    player2, move2 = players[1]
+    player1, strategy1 = players[0]
+    player2, strategy2 = players[1]
 
-    if move1 == move2:
-        return player1, move1
-    elif move1 == "R" and move2 == "S":
-        return player1, move1
-    elif move1 == "P" and move2 == "R":
-        return player1, move1
-    elif move1 == "S" and move2 == "P":
-        return player1, move1
+    if strategy1 == strategy2:
+        return f"{player1} {strategy1}"
+
+    if (strategy1 == 'R' and strategy2 == 'S') or \
+            (strategy1 == 'S' and strategy2 == 'P') or \
+            (strategy1 == 'P' and strategy2 == 'R'):
+        return f"{player1} {strategy1}"
     else:
-        return player2, move2
+        return f"{player2} {strategy2}"
 
 
-# Тесты
+# Примеры тестов
 try:
     print(rps_game_winner([['player1', 'P'], ['player2', 'S'], ['player3', 'S']]))  # => WrongNumberOfPlayersError
-except WrongNumberOfPlayersError:
-    print("Ошибка: неверное количество игроков")
+except WrongNumberOfPlayersError as e:
+    print(e)
 
 try:
     print(rps_game_winner([['player1', 'P'], ['player2', 'A']]))  # => NoSuchStrategyError
-except NoSuchStrategyError:
-    print("Ошибка: некорректный ход")
+except NoSuchStrategyError as e:
+    print(e)
 
-print(rps_game_winner([['player1', 'P'], ['player2', 'S']]))  # => 'player2 S'
-print(rps_game_winner([['player1', 'P'], ['player2', 'P']]))  # => 'player1 P'
+print(str(rps_game_winner([['player1', 'P'], ['player2', 'S']])))  # => 'player2 S'
+print(str(rps_game_winner([['player1', 'P'], ['player2', 'P']])))  # => 'player1 P'

@@ -1,16 +1,7 @@
-def multiply_numbers(inputs):
-    """
-    Возвращает произведение цифр, входящих в inputs.
-
-    :param inputs: строка, число или список цифр
-    :return: произведение цифр или None, если входные данные некорректны
-    """
-
-    # Проверка входных данных
-    if not inputs or not isinstance(inputs, (str, int, float, list)):
+def multiply_numbers(inputs=None):
+    if inputs is None or not isinstance(inputs, (str, int, float, list)):
         return None
 
-    # Получение цифр из входных данных
     digits = []
     if isinstance(inputs, str):
         digits = [int(char) for char in inputs if char.isdigit()]
@@ -19,7 +10,6 @@ def multiply_numbers(inputs):
     elif isinstance(inputs, list):
         digits = [int(num) for num in inputs if isinstance(num, int)]
 
-    # Умножение цифр
     if digits:
         product = 1
         for digit in digits:

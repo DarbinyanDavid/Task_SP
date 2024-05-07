@@ -1,12 +1,11 @@
-from typing import Dict
-
-
-def count_words(string: str) -> Dict[str, int]:
+def count_words(string: str) -> dict:
     words = string.lower().split()
 
     word_counts = {}
 
     for word in words:
+        if word == '--':
+            continue
         if word not in word_counts:
             word_counts[word] = 0
         word_counts[word] += 1
@@ -14,6 +13,13 @@ def count_words(string: str) -> Dict[str, int]:
     return word_counts
 
 
-# Тесты
-print(count_words("A man, a plan, a canal -- Panama"))  # => {"a": 3, "man": 1, "canal": 1, "panama": 1, "plan": 1}
-print(count_words("Doo bee doo bee doo"))  # => {"doo": 3, "bee": 2}
+def print_dict_in_expected_format(dictionary: dict):
+    print("{", end="")
+    for key, value in dictionary.items():
+        print(f"'{key}': {value}, ", end="")
+    print("}")
+
+
+# Примеры тестов
+print_dict_in_expected_format(count_words("A man, a plan, a canal -- Panama"))
+print_dict_in_expected_format(count_words("Doo bee doo bee doo"))
