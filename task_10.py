@@ -1,5 +1,8 @@
+import re
+
+
 def count_words(string: str) -> dict:
-    words = string.lower().split()
+    words = re.findall(r'\b\w+\b', string.lower())
 
     word_counts = {}
 
@@ -16,7 +19,7 @@ def count_words(string: str) -> dict:
 def print_dict_in_expected_format(dictionary: dict):
     print("{", end="")
     for key, value in dictionary.items():
-        print(f"'{key}': {value}, ", end="")
+        print(f"‘{key}’: {value}, ", end="")
     print("}")
 
 

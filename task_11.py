@@ -1,5 +1,6 @@
 class Dessert:
     def __init__(self, name: str, calories: int = 0):
+        self._name = None
         self.name = name
         self.calories = calories
 
@@ -22,9 +23,9 @@ class Dessert:
     def is_healthy(self) -> bool:
         return self.calories < 200
 
-    def is_delicious(self) -> bool:
+    @staticmethod
+    def is_delicious() -> bool:
         return True
-
 
 # Пример использования
 dessert = Dessert(name="Cake", calories=300)
@@ -32,4 +33,4 @@ dessert = Dessert(name="Cake", calories=300)
 print(dessert.name)  # Cake
 print(dessert.calories)  # 300
 print(dessert.is_healthy())  # False
-print(dessert.is_delicious())  # True
+print(Dessert.is_delicious())  # True

@@ -18,7 +18,7 @@ class Dessert:
     @calories.setter
     def calories(self, value):
         if not isinstance(value, int):
-            raise TypeError("Числовое значение")
+            raise TypeError("Должно быть числовое значение.")
         self._calories = value
 
     def is_healthy(self) -> bool:
@@ -32,6 +32,8 @@ class JellyBean(Dessert):
     def __init__(self, name: str = "", calories: int = 0, flavor: str = ""):
         super().__init__(name, calories)
         self.flavor = flavor
+        if not isinstance(calories, int):
+            raise TypeError("Должно быть числовое значение.")
 
     @property
     def flavor(self):
@@ -77,12 +79,3 @@ if not dessert.is_delicious():
 dessert.flavor = "test_flavor"
 print(dessert.flavor)
 print(dessert.is_healthy())
-
-
-# Пример использования
-jelly_bean = JellyBean("Black Licorice", 100, "black licorice")
-print(jelly_bean.name)  # Black Licorice
-print(jelly_bean.calories)  # 100
-print(jelly_bean.flavor)  # black licorice
-print(jelly_bean.is_healthy())  # True
-print(jelly_bean.is_delicious())  # False
