@@ -32,8 +32,6 @@ class JellyBean(Dessert):
     def __init__(self, name: str = "", calories: int = 0, flavor: str = ""):
         super().__init__(name, calories)
         self.flavor = flavor
-        if not isinstance(calories, int):
-            raise TypeError("Должно быть числовое значение.")
 
     @property
     def flavor(self):
@@ -44,7 +42,7 @@ class JellyBean(Dessert):
         self._flavor = value
 
     def is_delicious(self) -> bool:
-        return super().is_delicious() and self.flavor != "black licorice"
+        return self.flavor != "black licorice" if self.flavor else True
 
 
 # Тесты

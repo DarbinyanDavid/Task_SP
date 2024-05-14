@@ -1,6 +1,5 @@
 class Dessert:
-    def __init__(self, name: str, calories: int = 0):
-        self._name = None
+    def __init__(self, name: str = "", calories: int = 0):
         self.name = name
         self.calories = calories
 
@@ -27,8 +26,9 @@ class Dessert:
     def is_delicious() -> bool:
         return True
 
+
 # Пример использования
-dessert = Dessert(name="Cake", calories=300)
+dessert = Dessert()
 
 print(dessert.name)  # Cake
 print(dessert.calories)  # 300
