@@ -23,7 +23,7 @@ class Dessert:
             try:
                 self._calories = int(value)
             except ValueError:
-                raise ValueError("Calories must be an integer")
+                raise ValueError("необходимо числовое значение")
 
     def is_healthy(self) -> bool:
         return self.calories < 200
