@@ -1,7 +1,7 @@
 class Dessert:
     def __init__(self, name: str = "", calories: int = 0):
-        self.name = name
-        self.calories = calories
+        self._name = name
+        self._calories = calories
 
     @property
     def name(self):
@@ -17,13 +17,7 @@ class Dessert:
 
     @calories.setter
     def calories(self, value):
-        if isinstance(value, int):
-            self._calories = value
-        else:
-            try:
-                self._calories = int(value)
-            except ValueError:
-                raise ValueError("необходимо числовое значение")
+        self._calories = value
 
     def is_healthy(self) -> bool:
         return self.calories < 200
@@ -50,7 +44,7 @@ print(dessert.name)
 if dessert.name != "test_name2":
     raise Exception("Setter for name is not working")
 
-dessert.calories = 150
+dessert.calories = '150'
 print(dessert.calories)
 dessert.calories = 250
 print(dessert.calories)
