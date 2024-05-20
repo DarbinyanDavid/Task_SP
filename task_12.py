@@ -1,7 +1,7 @@
 class Dessert:
-    def __init__(self, name: str, calories: int = 0):
-        self.name = name
-        self.calories = calories
+    def __init__(self, name: str = "", calories: int = 0):
+        self._name = name
+        self._calories = calories
 
     @property
     def name(self):
@@ -17,20 +17,14 @@ class Dessert:
 
     @calories.setter
     def calories(self, value):
-        if isinstance(value, int):
-            self._calories = value
-        else:
-            try:
-                self._calories = int(value)
-            except ValueError:
-                raise ValueError("необходимо числовое значение")
+        self._calories = value
 
     def is_healthy(self) -> bool:
         return self.calories < 200
 
-    def is_delicious(self) -> bool:
+    @staticmethod
+    def is_delicious() -> bool:
         return True
-
 
 class JellyBean(Dessert):
     def __init__(self, name: str = "", calories: int = 0, flavor: str = ""):
