@@ -17,10 +17,10 @@ class Dessert:
 
     @calories.setter
     def calories(self, value):
-        self._calories = value
+        self._calories = int(value)
 
     def is_healthy(self) -> bool:
-        return self.calories < 200
+        return self.calories < int(200)
 
     @staticmethod
     def is_delicious() -> bool:
@@ -46,7 +46,7 @@ if dessert.name != "test_name2":
 
 dessert.calories = '150'
 print(dessert.calories)
-dessert.calories = 250
+dessert.calories = '250'
 print(dessert.calories)
 if dessert.calories != 250:
     raise Exception("Setter for calories is not working")
