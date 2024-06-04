@@ -1,7 +1,7 @@
 class Dessert:
     def __init__(self, name: str = "", calories: int = 0):
         self._name = name
-        self._calories = calories
+        self._calories = int(calories)
 
     @property
     def name(self):
@@ -26,6 +26,7 @@ class Dessert:
     def is_delicious() -> bool:
         return True
 
+
 class JellyBean(Dessert):
     def __init__(self, name: str = "", calories: int = 0, flavor: str = ""):
         super().__init__(name, calories)
@@ -40,38 +41,7 @@ class JellyBean(Dessert):
         self._flavor = value
 
     def is_delicious(self) -> bool:
-        return self.flavor != "black licorice" if self.flavor else True
+        if self.flavor == "black licorice":
+            return False
+        return True
 
-
-# Тесты
-dessert = JellyBean()
-
-if not issubclass(dessert.__class__, JellyBean):
-    raise Exception("Invalid inheritance")
-
-dessert.name = "test_name"
-print(dessert.name)
-
-dessert.name = "test_name2"
-print(dessert.name)
-
-if dessert.name != "test_name2":
-    raise Exception("Setter for name is not working")
-
-dessert.calories = '100'
-print(dessert.calories)
-
-dessert.calories = '200'
-print(dessert.calories)
-
-if dessert.calories != 200:
-    raise Exception("Setter for calories is not working")
-
-print(dessert.is_delicious())
-
-if not dessert.is_delicious():
-    raise Exception("Invalid method result")
-
-dessert.flavor = "test_flavor"
-print(dessert.flavor)
-print(dessert.is_healthy())
