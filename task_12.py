@@ -45,3 +45,14 @@ class JellyBean(Dessert):
             return False
         return True
 
+
+while True:
+    try:
+        calories = int(input("Enter the number of calories: "))
+        break  # Если пользователь ввел корректное значение, выходим из цикла
+    except ValueError:
+        print("Please enter a valid integer value for calories.")
+
+dessert = Dessert(name=input("Enter the name of the dessert: "), calories=calories)
+print(dessert.is_healthy())
+
