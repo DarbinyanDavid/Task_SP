@@ -49,10 +49,14 @@ class JellyBean(Dessert):
 while True:
     try:
         calories = int(input("Enter the number of calories: "))
+        if calories < 0:
+            raise ValueError("Calories cannot be negative.")
         break  # Если пользователь ввел корректное значение, выходим из цикла
-    except ValueError:
+    except ValueError as e:
         print("Please enter a valid integer value for calories.")
+        print(e)
 
 dessert = Dessert(name=input("Enter the name of the dessert: "), calories=calories)
-print(dessert.is_healthy())
+
+
 
